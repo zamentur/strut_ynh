@@ -1,5 +1,5 @@
 #!/bin/bash
-$APP='strut'
+APP='strut'
 
 # Retrieve arguments
 domain=$(sudo yunohost app setting $APP domain)

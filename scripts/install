@@ -37,6 +37,7 @@ sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$APP.conf
 sudo service nginx reload
 sudo yunohost app setting $APP skipped_uris -v "/,/components/bootstrap/css,/components/etch,/components/spectrum,/scripts/libs,/preview_export/css,/preview_export/css/themes,/preview_export/download_assist,/styles"  
 if [ $public_site = "No" ];
+then
 	sudo yunohost app setting $APP protected_uris -v "/index.html,/scripts" 
 else              
 	sudo yunohost app setting $APP protected_uris -v "/uuuu"

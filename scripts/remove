@@ -1,0 +1,6 @@
+#!/bin/bash
+
+domain=$(sudo yunohost app setting strut domain)
+
+sudo rm -rf /var/www/strut
+sudo rm -f /etc/nginx/conf.d/$domain.d/strut.conf

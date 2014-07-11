@@ -22,6 +22,12 @@ define(function() {
 		viewEntries.forEach(function(entry) {
 			this._viewCtors[entry.meta().type] = entry.service();
 		}, this);
+
+		this._drawers = {};
+		var drawerEntries = registry.get('strut.ComponentDrawer');
+		drawerEntries.forEach(function(entry) {
+			this._drawers[entry.meta().type] = entry.service();
+		}, this);
 	}
 
 	ComponentFactory.prototype = {

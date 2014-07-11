@@ -26,7 +26,7 @@ define(['./ComponentButton', 'tantaman/web/widgets/ItemImportModal'],
 			},
 
 			/**
-			 * Add imported component to the slide.
+			 * Add importent component to the slide.
 			 * @private
 			 */
 			_itemImported: function(src) {

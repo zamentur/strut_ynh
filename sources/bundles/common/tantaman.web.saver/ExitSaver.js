@@ -1,34 +1,16 @@
 define(['./Saver'],
 function(Saver) {
 	'use strict';
-	function ExitSaver(exportable, options) {
-		this.exportable = exportable;
-		this.options = options || {};
+	function ExitSaver(exportables, storageInterface) {
+		Saver.apply(this, arguments);
 		this._unloaded = this._unloaded.bind(this);
 		$(window).unload(this._unloaded);
 	}
 
-	var proto = ExitSaver.prototype;
+	var proto = ExitSaver.prototype = Object.create(Saver.prototype);
 
 	proto._unloaded = function() {
-		var identifier;
-		if (this.options.identifier) {
-			identifier = this.options.identifier;
-		} else {
-			identifier = this.exportable.identifier();
-		}
-
-		var data = this.exportable.export();
-		try {
-			localStorage.setItem(identifier, JSON.stringify(data));
-		} catch(e) {
-			// TODO: throw up an alert about the presentation
-			// not having been saved.
-			localStorage.setItem(identifier, '');
-		}
-
-		if (this.options.cb)
-			this.options.cb();
+		this.__save();
 	};
 
 	proto.dispose = function() {

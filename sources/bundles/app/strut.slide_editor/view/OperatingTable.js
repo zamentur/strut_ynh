@@ -17,8 +17,8 @@ function(Backbone, empty, ComponentFactory, GlobalEvents, Component,
 		events: {
 			"click": "_clicked",
 			"focused": "_focus",
-			// "dragover": "_dragover",
-			// "drop": "_drop",
+			"dragover": "_dragover",
+			"drop": "_drop",
 			destroyed: 'dispose'
 		},
 
@@ -157,27 +157,24 @@ function(Backbone, empty, ComponentFactory, GlobalEvents, Component,
 		},
 
 		_drop: function(e) {
-			e.stopPropagation();
-			e.preventDefault();
-			var f = e.originalEvent.dataTransfer.files[0];
-
-			//dnd from another website?
-			//var url = $(e.originalEvent.dataTransfer.getData('text/html')).filter('img').attr('src');?
+			e.stopPropagation()
+			e.preventDefault()
+			var f = e.originalEvent.dataTransfer.files[0]
 
 			if (!f.type.match('image.*'))
 				return
 
-			// TODO: some sort of feedback
-			// to indicate that the image is being
-			// imported...
-			if (this._editorModel.hasStorage()) {
-				this._editorModel.addComponent({
-					src: {
-						file: f
-					},
-					type: 'Image'
-				}, this.model);
-			}
+			var reader = new FileReader()
+			var self = this;
+			reader.onload = function(e) {
+				self.model.add(
+					ComponentFactory.instance.createModel({
+						type: 'Image',
+						src: e.target.result
+					}));
+			};
+
+			reader.readAsDataURL(f)
 		},
 
 		_componentAdded: function(model, comp) {

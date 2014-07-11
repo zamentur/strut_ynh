@@ -274,8 +274,9 @@ define(["libs/backbone",
 						this.get('components').splice(idx, 1);
 						this.trigger("contentsChanged");
 						this.trigger("change:components.remove", this, component);
+						this._selectionChanged(component, false);
 						component.trigger("unrender");
-						component.dispose();
+						component.off();
 						return component;
 					} else {
 						return undefined;

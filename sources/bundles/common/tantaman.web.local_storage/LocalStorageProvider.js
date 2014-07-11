@@ -1,4 +1,4 @@
-define(['Q'], function(Q) {
+define(function() {
 	var prefix = "strut-";
 	function LocalStorageProvider() {
 		this.impl = localStorage;
@@ -16,7 +16,7 @@ define(['Q'], function(Q) {
 
 		},
 
-		ls: function(path, regex) {
+		ls: function(path, regex, cb) {
 			// Paths are currently ignored
 			var numFiles = this.impl.length;
 			var fnames = [];
@@ -28,31 +28,33 @@ define(['Q'], function(Q) {
 				}
 			}
 
-			return Q(fnames);
+			cb(fnames);
+
+			return this;
 		},
 
-		rm: function(path) {
+		rm: function(path, cb) {
 			this.impl.removeItem(prefix + path);
-			return Q(true);
+			if (cb)
+				cb(true);
+			return this;
 		},
 
-		getContents: function(path) {
+		getContents: function(path, cb) {
 			var item = this.impl.getItem(prefix + path);
 			if (item != null) {
 				try {
 					var data = JSON.parse(item);
-					return Q(data);
+					cb(data);
 				} catch (e) {
-					var deferred = Q.defer();
-					deferred.reject(e);
-					return deferred.promise;
+					cb(null, e);
 				}
 			}
 
 			return this;
 		},
 
-		setContents: function(path, data) {
+		setContents: function(path, data, cb) {
 			try {
 				this.impl.setItem(prefix + path, JSON.stringify(data));
 			} catch (e) {
@@ -61,7 +63,9 @@ define(['Q'], function(Q) {
 					alert("Strut currently uses your browser's LocalStorage to save presentations which is limited to between 2.5 and 5mb.\n\nYou are currently over this limit so your presentation will not be saved.  You may continue editing, however.\n\nTry removing any images you dragged in and link to them instead.\n\nWe're working on improving the storage capacity!  5mb should be good if you link to your images (e.g., file://path/to/image or http://url/of/image).\n\nSorry for the inconvenience that this may cause.  We are working to resolve the issue!");
 				}
 			}
-			return Q(true);
+			if (cb)
+				cb(true);
+			return this;
 		}
 	};
 

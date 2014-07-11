@@ -25,11 +25,5 @@ define(function () {
 	window.config = config;
 	window.sessionMeta = sessionMeta;
 
-	if (window.sessionMeta.lastProvider == 'localstorage') {
-		// This is a check to upgrade our storage mechanisms
-		window.sessionMeta.lastProvider = 'largelocalstorage';
-		window.__requiresStorageConversion = true;
-	}
-
 	return config;
 });

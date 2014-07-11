@@ -18,27 +18,23 @@ function(Handlebars, Math2, marked, DeckUtils) {
 				switch (componentModel.get("type")) {
 					case "Image":
 						if (componentModel.get("imageType") === "SVG") {
-							result = JST["strut.presentation_generator.impress/SVGImage"](componentModel);
+							result = JST["strut.presentation_generator.impress/SVGImage"](componentModel.attributes);
 						} else {
-							result = JST["strut.presentation_generator.impress/Image"](componentModel);
+							result = JST["strut.presentation_generator.impress/Image"](componentModel.attributes);
 						}
 						break;
 					case "TextBox":
-						result = JST["strut.presentation_generator.impress/TextBox"](_this.convertTextBoxData(componentModel));
+						result = JST["strut.presentation_generator.impress/TextBox"](_this.convertTextBoxData(componentModel.attributes));
 						break;
 					case "Video":
 						if (componentModel.get("videoType") === "html5") {
-							result = JST["strut.presentation_generator.impress/Video"](componentModel);
+							result = JST["strut.presentation_generator.impress/Video"](componentModel.attributes);
 						} else {
-							result = JST["strut.presentation_generator.impress/Youtube"](componentModel);
+							result = JST["strut.presentation_generator.impress/Youtube"](componentModel.attributes);
 						}
 						break;
 					case "WebFrame":
-						result = JST["strut.presentation_generator.impress/WebFrame"](componentModel);
-						break;
-					case "Shape":
-						result = JST["strut.presentation_generator.impress/Shape"](componentModel);
-						break;
+						result = JST["strut.presentation_generator.impress/WebFrame"](componentModel.attributes);
 				}
 				return new Handlebars.SafeString(result);
 			});
@@ -102,16 +98,6 @@ function(Handlebars, Math2, marked, DeckUtils) {
 				if (string)
 					return new Handlebars.SafeString(marked(string));
 				return '';
-			});
-
-			Handlebars.registerHelper("shapeSvg", function() {
-				if (this.fill && this.markup) {
-					var string = '<svg fill="' + this.fill + '" ' + this.markup.substring(4);
-					return new Handlebars.SafeString(string);
-				} else if (this.markup) {
-					return new Handlebars.SafeString(this.markup);
-				} else
-					return '';
 			});
 
 			Handlebars.registerHelper("isBGImg", function(string, options) {

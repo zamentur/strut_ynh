@@ -19,7 +19,6 @@ define(["./ComponentView", './Mixers'],
 					this.model.off("change:scale", this._setUpdatedTransform, this);
 					this.model.on("change:scale", Mixers.scaleChangeByResize, this);
 				}
-				this.model.on('change:uri', this._urlChanged, this);
 			},
 
 			/**
@@ -31,26 +30,14 @@ define(["./ComponentView", './Mixers'],
 				var $img,
 					_this = this;
 				ComponentView.prototype.render.call(this);
-
-				var url = this.model.getURL();
-				if (url) {
-					$img = $("<img src=" + url + "></img>");	
-				} else {
-					$img = $("<img></img>");	
-				}
-				
+				$img = $("<img src=" + (this.model.get('src')) + "></img>");
 				$img.load(function() {
 					return _this._finishRender($(this));
 				});
 				$img.error(function() {
 					return _this.remove();
 				});
-				this.$img = $img;
 				return this.$el;
-			},
-
-			_urlChanged: function(model, url) {
-				this.$img.attr('src', url);
 			},
 
 			/**

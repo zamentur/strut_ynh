@@ -5,12 +5,11 @@ function(Backbone) {
 	// ServiceCollection does most of it.
 	function StorageProvidersWrapper(registry) {
 		this.registry = registry;
-		this.providers = {};
-		
+
 		this.registry.on('registered:tantaman.web.StorageProvider',
 			this._providerRegistered, this);
 
-		// this._getProviders();
+		this._getProviders();
 		// TODO: handle de-registrations
 		this._updateCurrentProvider();
 	}

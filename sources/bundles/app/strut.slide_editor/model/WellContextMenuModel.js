@@ -6,8 +6,7 @@ function(Backbone) {
 		initialize: function() {
 			this.subs = [];
 			this._registry = this.editorModel.registry;
-			// this._createButtons();
-			this.set('contextButtons', []);
+			this._createButtons();
 
 			this.subs.push(this._registry.on('registered:strut.WellContextButtonProvider',
 			this._buttonRegistered, this));

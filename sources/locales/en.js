@@ -33,9 +33,5 @@ define({
 		click_below: 'Click below to download'
 	},
 	background: 'Background',
-	surface: 'Surface',
-	invalid_filename: 'Invalid Filename',
-	new_presentation: 'New Presentation',
-	name: 'Name',
-	create_presentation: 'Create Presentation'
+	surface: 'Surface'
 });

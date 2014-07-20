@@ -28,10 +28,10 @@ sudo service php5-fpm restart
 # Reload Nginx
 sudo service nginx reload
 sudo yunohost app setting $APP skipped_uris -v "/"  
-if [ $public_site = "No" ];
-then              
-	sudo yunohost app setting $APP protected_uris -v "/admin,/index.php,/choix_date.php,/infos_sondage.php,/scripts" 
-else              
+if [ "$public_site" = "Yes" ];
+then
 	sudo yunohost app setting $APP protected_uris -v "/admin,/scripts"
+else
+	sudo yunohost app setting $APP protected_uris -v "/admin,/index.php,/choix_date.php,/infos_sondage.php,/scripts"
 fi
 sudo yunohost app ssowatconf

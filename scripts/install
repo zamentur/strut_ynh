@@ -27,7 +27,7 @@ sudo chown -R www-data: $final_path
 # Reload Nginx and regenerate SSOwat conf
 sudo service php5-fpm restart
 
-sudo apt-get install php-fpdf
+sudo apt-get install -y php-fpdf
 
 # Modify Nginx configuration file and copy it to Nginx conf directory
 sed -i "s@PATHTOCHANGE@$path@g" ../conf/nginx.conf
@@ -36,10 +36,10 @@ sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$APP.conf
 # Reload Nginx and regenerate SSOwat conf
 sudo service nginx reload
 sudo yunohost app setting $APP skipped_uris -v "/,/components/bootstrap/css,/components/etch,/components/spectrum,/scripts,/scripts/libs,/preview_export/css,/preview_export/css/themes,/preview_export/download_assist,/styles"  
-if [ $public_site = "No" ];
+if [ "$public_site" = "Yes" ];
 then
-	sudo yunohost app setting $APP protected_uris -v "/index.html,/scripts" 
-else              
 	sudo yunohost app setting $APP protected_uris -v "/uuuu"
+else              
+	sudo yunohost app setting $APP protected_uris -v "/index.html,/scripts" 
 fi
 sudo yunohost app ssowatconf

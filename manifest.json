@@ -5,9 +5,7 @@
         "en": "Strut is a slide editor creating impress.js presentations.",
         "fr": "Strut est un éditeur de slide permetant de créer des présentation impress.js."
     },
-    "license": "GNU AGPLv3",
-    "url": "http://strut.io/",
-    "maintainer": {
+    "developer": {
         "name": "zamentur",
         "email": "valentin@grimaud.me"
     },

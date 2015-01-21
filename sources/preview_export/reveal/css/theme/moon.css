@@ -1,4 +1,28 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic);
+/*@import url(https://fonts.googl eapis.com/css?family=Lato:400,700,400italic,700italic);*/
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lato Regular'), local('Lato-Regular'), url(./fonts/1YwB1sO8YE1Lyjf12WNiUA.woff2) format('woff2'), url(./fonts/9k-RPmcnxYEPm8CNFsH2gg.woff) format('woff');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Lato Bold'), local('Lato-Bold'), url(./fonts/H2DMvhDLycM56KNuAtbJYA.woff2) format('woff2'), url(./fonts/wkfQbvfT_02e2IWO3yYueQ.woff) format('woff');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Lato Italic'), local('Lato-Italic'), url(./fonts/PLygLKRVCQnA5fhu3qk5fQ.woff2) format('woff2'), url(./fonts/oUan5VrEkpzIazlUe5ieaA.woff) format('woff');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(./fonts/HkF_qI1x_noxlxhrhMQYEFtXRa8TVwTICgirnJhmVJw.woff2) format('woff2'), url(./fonts/HkF_qI1x_noxlxhrhMQYED8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
 /**
  * Solarized Dark theme for reveal.js.
  * Author: Achim Staebler

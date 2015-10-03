@@ -14,5 +14,5 @@ sudo cp -a $final_path "${BACKUP_DIR}/www"
 
 # Copy the conf files
 mkdir -p "${BACKUP_DIR}/conf"
-sudo cp -a /etc/nginx/conf.d/$domain.d/$APP.conf "${BACKUP_DIR}/conf/"
+sudo cp -a /etc/nginx/conf.d/$domain.d/$APP.conf "${BACKUP_DIR}/conf/nginx.conf"
 

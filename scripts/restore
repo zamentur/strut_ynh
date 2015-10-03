@@ -13,7 +13,7 @@ public_site=$(sudo yunohost app setting $APP public_site)
 # Check domain/path availability
 sudo yunohost app checkurl $domain$path -a $APP
 if [[ ! $? -eq 0 ]]; then
-    echo "There is already an app on this URL : $domain$path" | tee /dev/stderr
+    echo "There is already an app on this URL : $domain$path" | sudo tee /dev/stderr
     exit 1
 fi
 
@@ -21,7 +21,7 @@ fi
 final_path=/var/www/$APP
 
 if [ -d $final_path ]; then
-    echo "There is already a directory: $final_path " | tee /dev/stderr
+    echo "There is already a directory: $final_path " | sudo tee /dev/stderr
     exit 1
 fi
 sudo cp -a "${BACKUP_DIR}/www" $final_path 
@@ -30,13 +30,13 @@ sudo chown -R www-data: $final_path
 # Restore the conf files
 conf=/etc/nginx/conf.d/$domain.d/$APP.conf
 if [ -f $conf ]; then
-    echo "There is already a nginx conf file at this path: $conf " | tee /dev/stderr
+    echo "There is already a nginx conf file at this path: $conf " | sudo tee /dev/stderr
     exit 1
 fi
 sudo cp -a "${BACKUP_DIR}/conf/nginx.conf" $conf
 
 # Reload Nginx
-service nginx reload
+sudo service nginx reload
 
 # Set ssowat config
 sudo yunohost app setting $APP skipped_uris -v "/" 
